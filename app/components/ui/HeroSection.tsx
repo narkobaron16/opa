@@ -71,7 +71,7 @@ export default function HeroSection() {
                                   alt=""
                                   className="w-[50px] h-[50px]"/>
                             </div>
-                            <div className="flex "></div>
+                            <div className="flex rounded-full bg-yellow-300 "></div>
                         </div>
                         <div>
                             <h4 className="text-lg font-medium mb-1">Latest News Updates</h4>
