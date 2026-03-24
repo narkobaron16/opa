@@ -1,7 +1,12 @@
+'use client'
 import Image from 'next/image';
-import { ArrowUpRight, Play, Star } from 'lucide-react';
+import { ArrowUpRight, Play, Pause, Star } from 'lucide-react';
+import React, { useState, useRef } from 'react'
 
 export default function PodcastCards() {
+    const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+    const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
     const podcasts = [
         {
             title: "AI Revolution",
@@ -31,15 +36,34 @@ export default function PodcastCards() {
         }
     ];
 
+    const togglePlay = (idx: number) => {
+        const video = videoRefs.current[idx];
+        if (video) {
+            if (playingIndex === idx) {
+                video.pause();
+                setPlayingIndex(null);
+            } else {
+                if (playingIndex !== null && videoRefs.current[playingIndex]) {
+                    videoRefs.current[playingIndex]?.pause();
+                }
+                video.play();
+                setPlayingIndex(idx);
+            }
+        }
+    };
+
     return (
         <section className="bg-[#0A0A0A] text-white">
             <div className="max-w-7xl mx-auto">
                 {podcasts.map((item, idx) => (
                     <div key={idx} className="flex flex-col lg:flex-row border-b border-white/10 last:border-0">
                         <div className="w-full lg:w-[40%] p-6 py-10 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col items-start justify-center">
-                            <div className="w-20 h-20 rounded-lg flex items-center justify-start mb-8">
-                                <Image src={item.icon} alt="" width={50} height={50} />
-                            </div>
+                            {/* Исправлено обращение к иконке */}
+                            <img
+                                src={item.icon}
+                                alt={item.title}
+                                className="transition-transform duration-300 mb-4"
+                            />
                             <div className="w-full flex items-center justify-between py-4 mb-6">
                                 <h2 className="text-2xl md:text-3xl font-semibold">{item.title}</h2>
                                 <div className="flex gap-1">
@@ -59,10 +83,13 @@ export default function PodcastCards() {
                             </div>
                         </div>
                         <div className="p-8 lg:w-[60%] flex flex-col justify-center">
-                            <div className="relative aspect-video rounded-3xl mb-8 group cursor-pointer overflow-hidden">
+                            <div
+                                className="relative aspect-video rounded-3xl mb-8 group cursor-pointer overflow-hidden"
+                                onClick={() => togglePlay(idx)}
+                            >
                                 <video
+                                    ref={(el) => { videoRefs.current[idx] = el; }}
                                     src={item.thumbnail}
-                                    autoPlay
                                     loop
                                     muted
                                     playsInline
@@ -70,7 +97,11 @@ export default function PodcastCards() {
                                 />
                                 <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
                                     <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/10">
-                                        <Play size={24} className="fill-white text-white ml-1" />
+                                        {playingIndex === idx ? (
+                                            <Pause size={24} className="fill-white text-white" />
+                                        ) : (
+                                            <Play size={24} className="fill-white text-white ml-1" />
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +110,7 @@ export default function PodcastCards() {
                             <p className="text-gray-400 text-sm mb-10 leading-relaxed">
                                 {item.longDesc}
                             </p>
-                            <div className="flex items-center justify-center sm:flex-row gap-4">
+                            <div className="flex items-center justify-center sm:flex-row gap-1">
                                 {item.stats.map((stat, i) => (
                                     <div key={i} className="flex-1 bg-[#141414] border border-[#262626] rounded-xl p-6 shadow-sm flex flex-col items-start justify-center">
                                         <p className="text-sm text-[#98989A] mb-2 leading-tight">{stat.label}</p>
