@@ -1,14 +1,26 @@
+<<<<<<< HEAD
 version: "3.9"
 
 services:
   postgres:
     image: postgres:16
+=======
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15
+>>>>>>> b291eefeb2dacb7d749cdd4240d7080584d63b55
     container_name: next_postgres
     restart: always
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
+<<<<<<< HEAD
       POSTGRES_DB: mydatabase
+=======
+      POSTGRES_DB: nextdb
+>>>>>>> b291eefeb2dacb7d749cdd4240d7080584d63b55
     ports:
       - "5432:5432"
     volumes:
