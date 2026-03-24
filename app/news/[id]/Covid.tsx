@@ -13,13 +13,13 @@ const Covid = () => {
     return (
         <div className="bg-black text-white min-h-screen">
             <section className="relative w-full h-[400px] md:h-[500px] overflow-hidden flex items-center justify-center border-b border-white/10">
-                <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 z-0 transition duration-75">
                     <Image
                         src="/card/Image (4).svg"
                         alt="Hero"
                         fill
                         priority
-                        className="object-cover animate-subtle-zoom"
+                        className="object-cover animate-subtle-zoom "
                     />
                     <div className="absolute inset-0 bg-black/60" />
                 </div>

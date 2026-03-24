@@ -5,7 +5,7 @@ import Image from 'next/image';
 const footerData = [
     {
         title: "Home",
-        links: ["Features", "Blogs", { text: "Resources", badge: "New" }, "Testimonials", "Contact Us", "Newsletter"],
+        links: ["Features", "Blogs", { text: "Resources", badge: "New" }, "Testimonials", "contact Us", "Newsletter"],
     },
     {
         title: "News",

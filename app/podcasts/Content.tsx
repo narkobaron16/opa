@@ -1,5 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
-
 export default function Content() {
     return (
         <section className="bg-[#141414] py-5 md:py-20 ">
