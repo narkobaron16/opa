@@ -16,3 +16,14 @@
 .animate-subtle-zoom {
     animation: subtle-zoom 20s ease-in-out infinite;
 }
+
+
+@keyframes ray-dash {
+    to {
+        stroke-dashoffset: -100;
+    }
+}
+
+.animate-ray-move {
+    animation: ray-dash 15s linear infinite;
+}

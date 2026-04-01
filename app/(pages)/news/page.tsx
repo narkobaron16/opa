@@ -1,10 +1,10 @@
 import Header from "@/app/components/ui/Header";
-import NewsHero from "@/app/news/NewsHero";
-import Discover from "@/app/news/Discover"
-import Blog from "@/app/news/Blog";
-import Videos from "@/app/news/Videos"
-import VideoNews from "@/app/news/VideoNews"
-import FutureTech from "@/app/components/ui/FutureTech";
+import NewsHero from "@/app/(pages)/news/NewsHero";
+import Discover from "@/app/(pages)/news/Discover"
+import Blog from "@/app/(pages)/news/Blog";
+import Videos from "@/app/(pages)/news/Videos"
+import VideoNews from "@/app/(pages)/news/VideoNews"
+import FutureTech from "@/app/(pages)/Home/FutureTech";
 import Footer from "@/app/components/ui/Footer";
 
 export default function NewsPage() {
