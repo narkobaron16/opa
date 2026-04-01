@@ -1,35 +1,53 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Footer from "@/app/components/ui/Footer";
 import Header from "@/app/components/ui/Header";
-import StatsSection from "@/app/(pages)/resources/StatsSection";
-import ResourceGrid from "@/app/(pages)/resources/ResourceGrid";
-
+import { ResourcesHero } from "@/app/(pages)/resources/ResourcesHero";
+import { ResourcesHeader } from "@/app/(pages)/resources/ResourcesHeader";
+import { ResourceFeaturedCard } from "@/app/(pages)/resources/ResourceFeaturedCard";
+import { CONTENT_BY_TAB } from "./data";
+import {ResourceGrid} from "@/app/(pages)/resources/ResourceGrid";
+import FutureTech from "@/app/(pages)/Home/FutureTech";
 
 export default function NewsPage() {
-    return (
-        // Основной контейнер с темным фоном из макета
-        <div className="min-h-screen bg-white dark:bg-black text-white flex flex-col relative overflow-hidden">
+    const [tab, setTab] = useState("whitepapers");
 
-            {/* 2. ШАПКА: Header */}
+    // Выбираем объект данных для текущего таба
+    const currentData = CONTENT_BY_TAB[tab as keyof typeof CONTENT_BY_TAB];
+
+    return (
+        <div className="min-h-screen bg-black/60 text-white flex flex-col relative overflow-hidden">
             <Header />
 
-            {/* ГЛАВНЫЙ КОНТЕНТ: Ограничен по ширине и центрирован */}
-            <main className="relative z-10 flex-grow mx-auto px-6 md:px-10 w-full space-y-24 md:space-y-32 py-16 md:py-24">
+            <main className="relative z-10 flex-grow mx-auto w-full max-w-8xl">
+                <ResourcesHero />
 
-                {/* 3. HERO СЕКЦИЯ: Заголовок и Статистика */}
-                <section className="animate-in fade-in duration-700">
-                    <StatsSection />
-                </section>
+                <div className="px-6 md:px-10 space-y-24 md:space-y-32 py-16 md:py-24">
+                    <ResourcesHeader activeTab={tab} setActiveTab={setTab} />
 
-                <ResourceGrid />
+                    <div className="">
+                        {currentData && Array.isArray(currentData) ? (
+                            currentData.map((item, index) => (
+                                <ResourceFeaturedCard
+                                    key={`${tab}-${index}`}
+                                    globalInfo={item.globalInfo}
+                                    cards={item.cards}
+                                />
+                            ))
+                        ) : (
+                            <div className="text-center py-20 text-gray-500">
+                                No resources available.
+                            </div>
+                        )}
+                    </div>
 
+                    <ResourceGrid />
+                    <FutureTech/>
+                </div>
             </main>
 
-            {/* 7. ПОДВАЛ: Footer */}
             <Footer />
-
         </div>
     );
 }
