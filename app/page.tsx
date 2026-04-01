@@ -1,4 +1,4 @@
-import Image from "next/image"; // Добавили импорт
+import Image from "next/image";
 import Header from "@/app/components/ui/Header";
 import HeroSection from "@/app/(pages)/Home/HeroSection";
 import FeaturesHeader from "@/app/(pages)/Home/FeaturesHeader";
@@ -28,7 +28,6 @@ export default function HomePage() {
                 <Constants />
                 <FutureTech />
 
-                {/* Секция из входящих изменений (если она нужна) */}
                 <div className="py-20 flex flex-col items-center gap-6">
                     <Image
                         className="dark:invert"
