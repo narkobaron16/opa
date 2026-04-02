@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import RayBackground from "@/app/(pages)/Home/RayBackground";
 
 const users = [
     { id: 1, src: "/icon/Image.png" },
@@ -42,7 +43,7 @@ export default function HeroSection() {
 
                 <div className="lg:col-span-5 p-10 lg:p-12 flex flex-col justify-end relative">
                     {/* Фон с градиентом */}
-                    <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-gray-900/50 to-transparent pointer-events-none" />
+                    <RayBackground />
 
                     <div className="relative z-10 space-y-6">
                         <div className="flex -space-x-3 items-center">
